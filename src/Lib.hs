@@ -64,3 +64,19 @@ pbi pais = ingresoPerCapita pais * poblacionActiva pais
 poblacionActiva :: Pais -> Float
 poblacionActiva pais = poblacionSectorPublico pais + poblacionSectorPrivado pais
 
+
+-- Punto 3)
+type Receta = [Estrategia]
+
+receta :: Estrategia
+receta  = prestarMillonesDolares 200 . explotacionRecursosNaturales "Mineria"
+
+aplicarReceta :: Estrategia -> Pais -> Pais
+aplicarReceta receta pais= receta $ pais
+
+-- Con Lista
+receta' :: Receta
+receta' = [prestarMillonesDolares 200, explotacionRecursosNaturales "Mineria"]
+
+aplicarReceta' :: Receta -> Pais -> Pais
+aplicarReceta' receta pais = foldr ($) pais receta'
